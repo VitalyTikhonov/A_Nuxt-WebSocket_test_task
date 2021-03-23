@@ -2,7 +2,7 @@
   <div>
     <v-card
       class="mx-auto"
-      max-width="344"
+      max-width="360"
       v-for="(item, index) in echo"
       :key="index"
     >
@@ -17,22 +17,12 @@ export default {
   head: {
     title: "Тест – В. Тихонов"
   },
-  // beforeCreate() {
-  //   this.$store.dispatch("connectPieSocket");
-  // },
-  // beforeMount() {
-  //   this.$store.dispatch("queryPieSocket");
-  //   this.$store.dispatch("queryWebSocketOrg");
-  // },
   mounted() {
     this.$connectPieSocket((message) => {
       this.$store.dispatch("queryPieSocket", message);
     });
+    // this.$messagePieSocket();
   },
-  // async fetch({ store, route }) {
-  //   await store.dispatch("queryPieSocket");
-  //   await store.dispatch("queryWebSocketOrg");
-  // },
   computed: {
     echo() {
       return this.$store.getters["getEcho"];
