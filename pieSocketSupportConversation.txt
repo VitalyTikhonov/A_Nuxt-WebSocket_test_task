@@ -1,0 +1,79 @@
+Hi! I'm making a mock Nuxt.js app sending a message to PieSocket and logging the response to my page. But PieSocket seems to progressively multiply the number of responses. Could you please advise me on what might be wrong?
+
+– Customer Support
+Hello there. You might be making multiple connections
+– Customer Support
+To check this, open developer tools and go to the network tab
+– Customer Support
+Then filter "ws" to see if you are making multiple connections.
+I have been observing the network tab as well as console-logging every onmessage event. And upon every UI triggered response there are one query appearing on Network and N onmessage console logs, where N is the ordnal number of my UI trigger hits
+
+– Customer Support
+How many connections can you see there, can you please send a screenshot of the ws connections list.
+https://ucarecdn.com/8ea36865-5320-4231-b2db-d12475f2c73a/-/resize/235x/
+this is hitting the UI trigger #1
+
+...
+
+– Customer Support
+Are you using PieSocketJS?
+– Customer Support
+or any other WebSocket library
+https://ucarecdn.com/1d159591-e2a9-49d3-909b-4f7cc8cfa44f/-/resize/235x/
+this is hitting it second time. Please note one extra onmessage in the console
+
+https://ucarecdn.com/55f1e34c-5bfa-4586-b7cc-2af3d54d83b7/-/resize/235x/
+– Customer Support
+There should not be two connections as you see, this is the reason you are getting multiple connections
+– Customer Support
+Are you using PieSockerJs library?
+I think I am using another WebSocket library in parallel
+
+PieSocketJS? Not quite  understanding what you mean
+
+I just used the code by analogy to the one for frontend side here https://www.piesocket.com/docs/3.0/javascript-client
+
+– Customer Support
+Hold on I will link you to it
+– Customer Support
+https://www.npmjs.com/package/piesocket-js
+– Customer Support
+You can use this library
+https://ucarecdn.com/182eceaa-a408-4e24-bb2d-c87146f2f7a6/-/resize/235x/
+– Customer Support
+or
+– Customer Support
+you can move the connection code
+– Customer Support
+outside actions
+– Customer Support
+at the top
+– Customer Support
+and it will not trigger twice
+– Customer Support
+and work as expected
+– Customer Support
+What I mean is, assign piesocket = new WebSocket.... just below websocketOrgTracker = 0
+I see, thank you, perhaps I will try it
+
+There should not be two connections as you see, this is the reason you are getting multiple connections
+
+
+Which two connections did you mean ?
+
+– Customer Support
+http://ucarecdn.com/1d159591-e2a9-49d3-909b-4f7cc8cfa44f/
+– Customer Support
+In this screenshot I can see two connections, which sould not be the case.
+– Customer Support
+It is happening because actions is called multiple times and so WebSocket connection is created once again.
+– Customer Support
+The solution above will fix it
+Mm, my UI trigger is clicking a tab. You mean there should be only one piesocket connection opening per user's website session?
+
+– Customer Support
+Yes, once evey page load or website session in case of single page applications.
+and not one onopen per each reopening of the tab
+
+– Customer Support
+correct
