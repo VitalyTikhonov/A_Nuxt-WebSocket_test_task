@@ -13,6 +13,8 @@ export default ({ app }, inject) => {
       piesocket = new WebSocket(
         `wss://${clusterId}.websocket.me/v3/${channelId}?api_key=${apiKey}&notify_self`
       );
+      // wss://us-nyc-1.websocket.me/v3/1?api_key=kZNNVdhuWCmup7DQQyZ5eHYJElbljH90YcDLawby&notify_self
+
 
       piesocket.onopen = function() {
         console.log("piesocket connected");
@@ -27,6 +29,10 @@ export default ({ app }, inject) => {
       piesocket.onclose = function() {
         console.log("piesocket disconnected");
         piesocketConnected = false;
+      };
+
+      piesocket.onerror = function(error) {
+        console.log("error", error);
       };
     } else {
       piesocket.send(formMessage());

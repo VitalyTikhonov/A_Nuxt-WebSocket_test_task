@@ -42,10 +42,6 @@
     <v-main>
       <v-container>
         <nuxt />
-        <iframe
-          class="cv-frame"
-          src="https://docs.google.com/document/d/e/2PACX-1vRmYq8priFf5NHGpnvUSbZjaQ1Wpio4MzYaHyHw6l_vnlQ2upbUp-y3tJcuyknZj0F9TE6naWi88js1/pub?embedded=true"
-        ></iframe>
       </v-container>
     </v-main>
   </v-app>
@@ -92,13 +88,6 @@ export default {
 </script>
 
 <style>
-.cv-frame {
-  width: 100%;
-  height: 80vh;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .router-link {
   text-decoration: none;
 }

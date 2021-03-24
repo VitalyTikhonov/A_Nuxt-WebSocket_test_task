@@ -9,7 +9,7 @@ export default ({ app }, inject) => {
     if (webSocketOrgConnected === false) {
       ws = new WebSocket("wss://echo.websocket.org/");
 
-      ws.onopen = function open() {
+      ws.onopen = function() {
         console.log("webSocketOrg connected");
         webSocketOrgConnected = true;
         ws.send(formMessage());
@@ -19,9 +19,13 @@ export default ({ app }, inject) => {
         saveToStore(message.data);
       };
 
-      ws.onclose = function close() {
+      ws.onclose = function() {
         console.log("webSocketOrg disconnected");
         webSocketOrgConnected = false;
+      };
+
+      ws.onerror = function(error) {
+        console.log('error', error);
       };
     } else {
       ws.send(formMessage());
