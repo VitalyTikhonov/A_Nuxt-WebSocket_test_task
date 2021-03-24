@@ -6,7 +6,7 @@
           v-for="(item, i) in clickHandlingRoutes"
           :key="item.title + i"
           :to="item.to"
-          @click.stop="connectPieSocket"
+          @click.stop="connectSockets"
           router
           exact
         >
@@ -65,8 +65,11 @@ export default {
     };
   },
   methods: {
-    connectPieSocket() {
+    connectSockets() {
       this.$connectPieSocket(message => {
+        this.$store.dispatch("queryPieSocket", message);
+      });
+      this.$connectWebSocketOrg(message => {
         this.$store.dispatch("queryPieSocket", message);
       });
     }
