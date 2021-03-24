@@ -1,5 +1,4 @@
 import Vue from "vue";
-import WS from "ws";
 
 export default ({ app }, inject) => {
   let ws;
@@ -10,25 +9,22 @@ export default ({ app }, inject) => {
   }
   inject("connectWebSocketOrg", saveToStore => {
     if (webSocketOrgConnected === false) {
-      ws = new WS("wss://echo.websocket.org/", {
-        origin: "https://websocket.org"
-      });
+      ws = new WebSocket("wss://echo.websocket.org/");
 
-      ws.on("open", function open() {
+      ws.onopen = function open() {
         console.log("webSocketOrg connected");
         webSocketOrgConnected = true;
         ws.send(formMessage());
-      });
+      };
 
-      ws.on("message", function incoming(data) {
-        // console.log("data", data);
-        saveToStore(data);
-      });
+      ws.onmessage = function(message) {
+        saveToStore(message.data);
+      };
 
-      ws.on("close", function close() {
-        console.log("piesocket disconnected");
+      ws.onclose = function close() {
+        console.log("webSocketOrg disconnected");
         webSocketOrgConnected = false;
-      });
+      };
     } else {
       ws.send(formMessage());
     }
