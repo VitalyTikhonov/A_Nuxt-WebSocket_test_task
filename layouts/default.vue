@@ -32,7 +32,9 @@
     <v-app-bar fixed :clipped-left="clipped" app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title>
+        <router-link to="/" v-text="title" class="router-link" />
+      </v-toolbar-title>
 
       <v-spacer />
     </v-app-bar>
@@ -84,3 +86,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.router-link {
+  text-decoration: none;
+  color: white;
+}
+</style>
