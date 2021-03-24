@@ -1,8 +1,5 @@
-import Vue from "vue";
-import PieSocket from "piesocket-js";
-
 export default ({ app }, inject) => {
-  let channel;
+  let piesocket;
   let piesocketConnected = false;
   let pieSocketTracker = 0;
   function formMessage() {
@@ -10,31 +7,29 @@ export default ({ app }, inject) => {
   }
   inject("connectPieSocket", saveToStore => {
     if (piesocketConnected === false) {
-      const piesocket = new PieSocket({
-        clusterId: "us-nyc-1",
-        apiKey: "kZNNVdhuWCmup7DQQyZ5eHYJElbljH90YcDLawby"
-      });
-
+      const clusterId = "us-nyc-1";
       const channelId = 1;
-      channel = piesocket.subscribe(channelId);
+      const apiKey = "kZNNVdhuWCmup7DQQyZ5eHYJElbljH90YcDLawby";
+      piesocket = new WebSocket(
+        `wss://${clusterId}.websocket.me/v3/${channelId}?api_key=${apiKey}&notify_self`
+      );
 
-      channel.on("open", () => {
+      piesocket.onopen = function() {
         console.log("piesocket connected");
         piesocketConnected = true;
-        channel.connection.send(formMessage());
-      });
+        piesocket.send(formMessage());
+      };
 
-      channel.on("message", message => {
-        console.log("message.data", message.data);
+      piesocket.onmessage = function(message) {
         saveToStore(message.data);
-      });
+      };
 
-      channel.on("close", () => {
+      piesocket.onclose = function() {
         console.log("piesocket disconnected");
         piesocketConnected = false;
-      });
+      };
     } else {
-      channel.connection.send(formMessage());
+      piesocket.send(formMessage());
     }
   });
 };

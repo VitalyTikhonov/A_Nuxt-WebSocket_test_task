@@ -1,5 +1,3 @@
-import Vue from "vue";
-
 export default ({ app }, inject) => {
   let ws;
   let webSocketOrgConnected = false;
