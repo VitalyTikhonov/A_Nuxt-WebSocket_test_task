@@ -1,5 +1,5 @@
 # GEO_TECHNO_SOT_test_task
-Тестовое задание для компании "Гео Техно Сот". SSR-приложение на Nuxt.js (Vue) с использованием Vuetify. Основной функционал – тестовое подключение к websocket-серверам piesocket.com и www.websocket.org с отображением результатов на странице.
+Тестовое задание для компании "Гео Техно Сот". SSR-приложение на Nuxt.js (Vue) с использованием Vuetify. Основной функционал – тестовое подключение к websocket-серверам [piesocket.com](https://www.piesocket.com/) и [websocket.org](https://www.websocket.org) с отображением результатов на странице.
 
 A test task for a job at GEO TECHNO SOT. An SSR app on Nuxt.js (Vue) with Vuetify. The principal functionality is test connection to the websocket servers [piesocket.com](https://www.piesocket.com/) and [websocket.org](https://www.websocket.org) and display of the results on the page.
 
