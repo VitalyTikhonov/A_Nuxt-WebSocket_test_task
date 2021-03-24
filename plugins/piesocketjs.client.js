@@ -5,7 +5,7 @@ export default ({ app }, inject) => {
   let channel;
   let piesocketConnected = false;
   let pieSocketTracker = 0;
-  inject("connectPieSocket", saveToStore => {
+  inject("connectPieSocket", (saveToStore) => {
     if (piesocketConnected === false) {
       const piesocket = new PieSocket({
         clusterId: "us-nyc-1",

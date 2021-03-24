@@ -3,8 +3,21 @@
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
+          v-for="(item, i) in clickHandlingRoutes"
+          :key="item.title + i"
+          :to="item.to"
+          @click.stop="connectPieSocket"
+          router
+          exact
+        >
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          v-for="(item, i) in plainRoutes"
+          :key="item.title + i"
           :to="item.to"
           router
           exact
@@ -50,6 +63,21 @@ export default {
       ],
       title: "Тестовое задание Виталия Тихонова"
     };
+  },
+  methods: {
+    connectPieSocket() {
+      this.$connectPieSocket(message => {
+        this.$store.dispatch("queryPieSocket", message);
+      });
+    }
+  },
+  computed: {
+    clickHandlingRoutes() {
+      return this.items.filter(item => item.title === "echo");
+    },
+    plainRoutes() {
+      return this.items.filter(item => item.title !== "echo");
+    }
   }
 };
 </script>

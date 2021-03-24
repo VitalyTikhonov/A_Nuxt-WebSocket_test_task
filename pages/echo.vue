@@ -17,12 +17,6 @@ export default {
   head: {
     title: "Тест – В. Тихонов"
   },
-  mounted() {
-    this.$connectPieSocket((message) => {
-      this.$store.dispatch("queryPieSocket", message);
-    });
-    // this.$messagePieSocket();
-  },
   computed: {
     echo() {
       return this.$store.getters["getEcho"];
