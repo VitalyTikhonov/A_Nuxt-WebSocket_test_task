@@ -22,3 +22,4 @@ To launch the program:
 - sign up at [piesocket.com](https://www.piesocket.com), go to _/settings/dashboard_ and get your _clusterId_ and _apiKey_, then use them to update the corresponding variables in the project's _\plugins\piesocketjs.client.js_ (the current values are not guaranteed to work);
 - start the project with _npm run dev_;
 - test the project by visiting the home page, _/echo_ and _/site_.
+..
